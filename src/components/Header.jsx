@@ -7,8 +7,8 @@ import Icon from './Icon'
 // 전역 네비게이션 — About 최우선, 무료 AI 도구는 개별 메뉴
 const NAV = [
   { to: '/about', label: 'About' },
-  { to: '/vol/course', label: '8차시 학습' },
   { to: '/schedule/course', label: '교육일정' },
+  { to: '/vol/course', label: '8차시 학습' },
   { to: '/labs/course', label: '실습 : 따라하기' },
   { to: '/tools/prompt/learn', label: '프롬프트학습' },
   { divider: true },
