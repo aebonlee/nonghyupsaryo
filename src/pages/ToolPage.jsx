@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Layout from '../components/Layout'
 import { getTool, TOOL_PAGES } from '../data/tools'
 import Icon from '../components/Icon'
+import CopyButton from '../components/CopyButton'
 
 const HERO = {
   signal: 'from-signal-400 to-signal-500 text-brand-950',
@@ -252,7 +253,10 @@ function PracticePage({ tool }) {
                   )}
                   {p.prompt && (
                     <div className="rounded-xl border border-slate-700 bg-slate-900 p-4">
-                      <div className="mb-1 text-[10.5px] font-bold uppercase tracking-wider text-slate-400">프롬프트 예시</div>
+                      <div className="mb-1 flex items-center justify-between">
+                        <span className="text-[10.5px] font-bold uppercase tracking-wider text-slate-400">프롬프트 예시</span>
+                        <CopyButton text={p.prompt} />
+                      </div>
                       <pre className="whitespace-pre-wrap break-words font-mono text-[12.5px] leading-relaxed text-slate-100">{p.prompt}</pre>
                     </div>
                   )}
@@ -338,7 +342,10 @@ function PromptsPage({ tool }) {
           <div className="space-y-3">
             {tool.recommendedPrompts.map((p, i) => (
               <div key={i} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <div className="mb-1.5 text-[13.5px] font-bold text-brand-900">{p.title}</div>
+                <div className="mb-1.5 flex items-center justify-between gap-2">
+                  <span className="text-[13.5px] font-bold text-brand-900">{p.title}</span>
+                  <CopyButton text={p.prompt} />
+                </div>
                 <pre className="whitespace-pre-wrap break-words rounded-lg border border-slate-700 bg-slate-900 p-3.5 font-mono text-[12.5px] leading-relaxed text-slate-100">{p.prompt}</pre>
               </div>
             ))}

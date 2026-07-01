@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import Icon from '../components/Icon'
+import CopyButton from '../components/CopyButton'
 import { promptGuide } from '../data/tools'
 import {
   scoreCriteria,
@@ -105,28 +106,6 @@ function Badge({ grade }) {
   )
 }
 
-function CopyButton({ text }) {
-  const [done, setDone] = useState(false)
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setDone(true)
-      setTimeout(() => setDone(false), 1500)
-    } catch {
-      /* ignore */
-    }
-  }
-  return (
-    <button
-      onClick={copy}
-      className={`shrink-0 rounded-lg px-2.5 py-1 text-[11.5px] font-bold transition ${
-        done ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-600 hover:bg-slate-300'
-      }`}
-    >
-      <Icon name={done ? 'fa-solid fa-check' : 'fa-regular fa-copy'} /> {done ? '복사됨' : '복사'}
-    </button>
-  )
-}
 
 /* ---------------- 학습하기 ---------------- */
 function LearnTab() {
