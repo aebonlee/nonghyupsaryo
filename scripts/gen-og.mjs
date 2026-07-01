@@ -127,6 +127,10 @@ function roundRect(ctx, x, y, w, h, r) {
   ctx.closePath()
 }
 
-const out = join(ROOT, 'public', 'og-image.png')
-fs.writeFileSync(out, canvas.toBuffer('image/png'))
-console.log('OG 이미지 생성 완료:', out)
+// 캐시 무력화를 위해 버전 파일명 사용 (카카오/페북 이미지 프록시 캐시 회피)
+const buf = canvas.toBuffer('image/png')
+for (const name of ['og.png', 'og-image.png']) {
+  const out = join(ROOT, 'public', name)
+  fs.writeFileSync(out, buf)
+  console.log('OG 이미지 생성 완료:', out)
+}
