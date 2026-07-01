@@ -67,9 +67,13 @@ export function ProgressProvider({ children }) {
           return { user_id: user.id, vol_id, part_num: Number(part_num) }
         })
       if (toUpload.length) {
-        await supabase.from('nonghyupsaryo_progress').upsert(toUpload, {
-          onConflict: 'user_id,vol_id,part_num',
-        })
+        try {
+          await supabase.from('nonghyupsaryo_progress').upsert(toUpload, {
+            onConflict: 'user_id,vol_id,part_num',
+          })
+        } catch (e) {
+          console.warn('[nonghyupsaryo] progress upload skipped:', e?.message || e)
+        }
       }
     })()
   }, [user])
@@ -87,18 +91,23 @@ export function ProgressProvider({ children }) {
         return next
       })
       if (user) {
-        if (done) {
-          await supabase
-            .from('nonghyupsaryo_progress')
-            .upsert(
-              { user_id: user.id, vol_id: volId, part_num: Number(partNum) },
-              { onConflict: 'user_id,vol_id,part_num' }
-            )
-        } else {
-          await supabase
-            .from('nonghyupsaryo_progress')
-            .delete()
-            .match({ user_id: user.id, vol_id: volId, part_num: Number(partNum) })
+        try {
+          if (done) {
+            await supabase
+              .from('nonghyupsaryo_progress')
+              .upsert(
+                { user_id: user.id, vol_id: volId, part_num: Number(partNum) },
+                { onConflict: 'user_id,vol_id,part_num' }
+              )
+          } else {
+            await supabase
+              .from('nonghyupsaryo_progress')
+              .delete()
+              .match({ user_id: user.id, vol_id: volId, part_num: Number(partNum) })
+          }
+        } catch (e) {
+          // 테이블 미생성 등으로 동기화 실패해도 로컬 저장은 유지(로그인 흐름 보호)
+          console.warn('[nonghyupsaryo] progress sync skipped:', e?.message || e)
         }
       }
     },
