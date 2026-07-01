@@ -72,10 +72,10 @@ export default function Header({ onToggleSidebar }) {
         </Link>
 
         {/* 데스크톱 네비 (오른쪽 정렬) */}
-        <nav className="ml-auto hidden items-center gap-0.5 lg:flex">
+        <nav className="ml-auto hidden items-center gap-1 lg:flex">
           {NAV.map((item, i) =>
             item.divider ? (
-              <span key={`d${i}`} className="mx-1.5 select-none text-slate-300">|</span>
+              <span key={`d${i}`} className="mx-2 select-none text-slate-300">|</span>
             ) : (
               <NavTab key={item.to} to={item.to} active={isActive(loc.pathname, item.to)}>
                 {item.label}
@@ -158,7 +158,7 @@ function NavTab({ to, active, children }) {
   return (
     <Link
       to={to}
-      className={`whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-semibold transition ${
+      className={`whitespace-nowrap rounded-lg px-2 py-1.5 text-[13px] font-semibold tracking-tight transition ${
         active ? 'bg-brand-50 text-brand-800' : 'text-slate-500 hover:bg-slate-100'
       }`}
     >
