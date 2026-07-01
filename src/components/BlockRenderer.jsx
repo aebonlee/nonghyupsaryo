@@ -100,6 +100,40 @@ function PromptBox({ block }) {
   )
 }
 
+// 실습 자료 다운로드 박스
+function DownloadBox({ block }) {
+  const base = import.meta.env.BASE_URL
+  return (
+    <div className="my-6 rounded-2xl border border-brand-200 bg-brand-50/60 p-5">
+      <div className="mb-3 flex items-center gap-2 text-[13.5px] font-bold text-brand-800">
+        <Icon name="fa-solid fa-download" /> {block.caption || '실습 자료 다운로드'}
+      </div>
+      <div className="grid gap-2.5 sm:grid-cols-2">
+        {(block.files || []).map((f, i) => (
+          <a
+            key={i}
+            href={`${base}samples/${encodeURIComponent(f.file)}`}
+            download={f.file}
+            className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3.5 shadow-sm transition hover:border-brand-300 hover:shadow-md"
+          >
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-[16px] text-emerald-700">
+              <Icon name="fa-solid fa-file-csv" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-[13.5px] font-bold text-brand-900">{f.name}</span>
+              {f.desc && <span className="block truncate text-[12px] text-slate-500">{f.desc}</span>}
+            </span>
+            <span className="shrink-0 rounded-lg bg-brand-800 px-2.5 py-1.5 text-[11.5px] font-bold text-white transition group-hover:bg-brand-700">
+              <Icon name="fa-solid fa-download" /> 받기
+            </span>
+          </a>
+        ))}
+      </div>
+      {block.note && <p className="mt-3 text-[12px] leading-relaxed text-slate-500">{block.note}</p>}
+    </div>
+  )
+}
+
 function Callout({ tone, label, icon, children }) {
   const tones = {
     tip: 'border-emerald-200 bg-emerald-50',
@@ -222,6 +256,9 @@ export default function BlockRenderer({ blocks }) {
 
           case 'promptbox':
             return <PromptBox key={i} block={b} />
+
+          case 'download':
+            return <DownloadBox key={i} block={b} />
 
           case 'tip': {
             const { body } = stripBracketPrefix(b.text)
