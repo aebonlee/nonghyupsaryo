@@ -1,5 +1,30 @@
+import { useState } from 'react'
 import { IMG_BASE } from '../data/courses'
 import Icon from './Icon'
+
+// 프롬프트/실습 박스 우측 상단 복사 버튼
+function CopyButton({ text }) {
+  const [done, setDone] = useState(false)
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setDone(true)
+      setTimeout(() => setDone(false), 1500)
+    } catch {
+      /* ignore */
+    }
+  }
+  return (
+    <button
+      onClick={copy}
+      className={`shrink-0 rounded-lg px-2.5 py-1 text-[11.5px] font-bold transition ${
+        done ? 'bg-emerald-500 text-white' : 'bg-white/10 text-slate-200 ring-1 ring-white/20 hover:bg-white/20'
+      }`}
+    >
+      <Icon name={done ? 'fa-solid fa-check' : 'fa-regular fa-copy'} /> {done ? '복사됨' : '복사'}
+    </button>
+  )
+}
 
 function Figure({ block }) {
   const { caption, img, source } = block
@@ -86,6 +111,9 @@ function PromptBox({ block }) {
           <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
           <span className="ml-2 text-[11px] font-medium uppercase tracking-wider text-slate-400">
             프롬프트 예시
+          </span>
+          <span className="ml-auto">
+            <CopyButton text={block.text} />
           </span>
         </div>
         <pre className="whitespace-pre-wrap break-words font-mono text-[13px] leading-relaxed text-slate-100">
