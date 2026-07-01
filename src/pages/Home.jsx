@@ -95,11 +95,11 @@ export default function Home() {
           })}
         </div>
 
-        <div className="relative mx-auto max-w-screen-xl px-5 py-16 sm:py-20">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-[12.5px] font-semibold text-signal-300 ring-1 ring-white/15">
+        <div className="relative mx-auto max-w-screen-xl px-5 py-12 sm:py-20">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-[11.5px] font-semibold text-signal-300 ring-1 ring-white/15 sm:text-[12.5px]">
             <Icon name="fa-solid fa-seedling" /> 농협사료 임직원 · 사무관리 업무혁신 실무
           </div>
-          <h1 className="mt-5 max-w-3xl text-3xl font-extrabold leading-tight tracking-tight sm:text-[42px]">
+          <h1 className="mt-5 max-w-3xl text-[28px] font-extrabold leading-tight tracking-tight sm:text-[42px]">
             생성형 <span className="text-signal-400">AI</span>로 여는 <br className="hidden sm:block" />사무관리 업무혁신
           </h1>
           <p className="mt-4 max-w-2xl text-[15.5px] leading-relaxed text-brand-100">
@@ -123,7 +123,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-4 text-center">
+          <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 text-center sm:mt-10 sm:flex sm:flex-wrap sm:gap-x-6 sm:gap-y-4">
             <Stat n="8차시" l="1일 8시간 과정" />
             <Stat n="6종" l="무료 AI 도구" />
             <Stat n="7종" l="실습 산출물" />
