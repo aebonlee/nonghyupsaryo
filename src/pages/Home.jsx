@@ -123,6 +123,16 @@ export default function Home() {
             </Link>
           </div>
 
+          {/* 확정 일시·장소 */}
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[13px] text-brand-100">
+            <span className="inline-flex items-center gap-1.5">
+              <Icon name="fa-solid fa-calendar-check" className="text-signal-300" /> 2026. 8. 20.(목) 08:00~17:00
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <Icon name="fa-solid fa-location-dot" className="text-signal-300" /> 농협사료 5층 중회의실
+            </span>
+          </div>
+
           <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 text-center sm:mt-10 sm:flex sm:flex-wrap sm:gap-x-6 sm:gap-y-4">
             <Stat n="8차시" l="1일 8시간 과정" />
             <Stat n="6종" l="무료 AI 도구" />
